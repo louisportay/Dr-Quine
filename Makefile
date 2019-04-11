@@ -6,70 +6,15 @@
 #    By: lportay <lportay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/13 10:52:14 by lportay           #+#    #+#              #
-#    Updated: 2019/03/20 17:11:57 by lportay          ###   ########.fr        #
+#    Updated: 2019/04/11 19:42:37 by lportay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: clean fclean re all tags rules
 
-SRCDIR= src_nm/
-
-vpath %.h includes/
-
-CFLAGS= -Wall -Wextra -Werror $(INCLUDE)
-DEBUG=sanitize
-OPT=LIB
-ARCH:= $(shell uname)
-
-ifeq ($(ARCH), Darwin)
-	CC= clang
-else ifeq ($(ARCH), Linux)
-	CC=gcc-8
-endif
-
-ifeq ($(DEBUG), yes)
-	CFLAGS+= -g3
-else ifeq ($(DEBUG), prod)
-	CFLAGS+= -O3 -DNDEBUG
-else ifeq ($(DEBUG), sanitize)
-	CFLAGS+= -g3 -fsanitize=address
-endif
-
-INCLUDE=\
-
-SRC= \
-
-OBJDIR= obj/
-
-OBJ= $(addprefix $(OBJDIR)/, $(SRC:%.c=%.o))
-
-LIBDIR= libft/
-LIB= libft.a
-
-NAME= 
-
-GREEN="\033[32m"
-RESET="\033[0m"
-
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBDIR) -lft
-	@echo $(GREEN)$@" Successfully created"$(RESET)
-
-$(OBJDIR)/%.o: $(SRCDIR)%.c nm.h | $(OBJDIR)
-	$(COMPILE.c) $< -o $@
-
-
-$(OBJDIR):
-	-mkdir -p $@
-
-main:
-	$(CC) $(CFLAGS) -o test $(main) -L$(LIBDIR) -lft
-	-rm -f $(main:.c=.o)
-
-tags:
-	ctags -R *
+all:
+	$(MAKE) -C C/
+	$(MAKE) -C ASM/
 
 rules:
 	@echo 'lportay' > auteur
@@ -84,13 +29,12 @@ rules:
 	7. Ask someone to review/test your project"
 
 clean:
-	$(RM) -r $(OBJDIR) 
-	@$(RM) test a.out
-	@$(RM) -r test.dSYM
+	$(MAKE) -C C/ clean
+	$(MAKE) -C ASM/ clean
 
 fclean: clean
-	$(RM) $(NAME)
-	@$(RM) -r $(NAME).dSYM
+	$(MAKE) -C C/ fclean
+	$(MAKE) -C ASM/ fclean
 
 re:
 	$(MAKE) fclean
