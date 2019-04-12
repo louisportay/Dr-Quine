@@ -1,6 +1,6 @@
 CC=clang
 
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -D REPLICATE
 
 SRC= Colleen.c\
 	 Grace.c\
