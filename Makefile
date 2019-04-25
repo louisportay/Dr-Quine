@@ -6,7 +6,7 @@
 #    By: lportay <lportay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/13 10:52:14 by lportay           #+#    #+#              #
-#    Updated: 2019/04/11 19:42:37 by lportay          ###   ########.fr        #
+#    Updated: 2019/04/25 18:12:48 by lportay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ rules:
 clean:
 	$(MAKE) -C C/ clean
 	$(MAKE) -C ASM/ clean
+	$(RM) Ruby/Sully_*.rb Ruby/Grace_kid.rb
 
 fclean: clean
 	$(MAKE) -C C/ fclean

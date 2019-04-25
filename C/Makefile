@@ -11,4 +11,11 @@ NAME= Colleen Sully Grace
 all: $(NAME)
 
 clean:
-	$(RM) $(NAME) Grace_kid.c Sully_*.c Sully_* a.out
+	$(RM) Grace_kid.c Sully_*.c Sully_*
+
+fclean: clean
+	$(RM) $(NAME)
+
+re:
+	$(MAKE) fclean
+	$(MAKE) all

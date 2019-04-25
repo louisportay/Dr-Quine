@@ -1,15 +1,16 @@
 ASM=nasm
 LD=ld
 
-ASFLAGS=-fmacho64
+ASFLAGS=-fmacho64 -D REPLICATE
 LDFLAGS=-macosx_version_min 10.12 -lc
+
 SRC= Colleen.s\
 	 Grace.s\
-	 #Sully.s\
+	 Sully.s
 
 OBJ=$(SRC:%.s=%.o)
 
-NAME= Colleen Grace #Sully
+NAME= Colleen Grace Sully
 
 all: $(NAME)
 
@@ -20,7 +21,10 @@ $(NAME): $(OBJ)
 	$(ASM) $(ASFLAGS) $<
 
 clean:
-	$(RM) $(NAME) Colleen.o Grace.o Grace_kid.s Sully_*.s Sully_* a.out
+	$(RM) Colleen.o Grace.o Sully.o Grace_kid.s Sully_*.s Sully_*
+
+fclean: clean
+	$(RM) $(NAME)
 
 re:
 	$(MAKE) clean
